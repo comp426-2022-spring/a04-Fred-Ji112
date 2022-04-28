@@ -97,7 +97,8 @@ if(args.debug == true) {
   app.get("/app/log/access", (req, res) => {
     try {
       const stmt = db.prepare(`SELECT * FROM accesslog`).all();
-      res.status(200).json(stmt);
+      res.status(200);
+      res.send(stmt);
     } catch {
       console.error(e);
     }
@@ -113,6 +114,8 @@ if (args.log == true) {
   const morgan = require('morgan');
   const accessLog = fs.createWriteStream('access.log', {flags: 'a'});
   app.use(morgan('combined', { stream: accessLog }));
+} else {
+  console.log("Not creating a new access.log");
 }
 
 app.use((req, res, next) => {
