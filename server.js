@@ -127,7 +127,7 @@ app.use((req, res, next) => {
     useragent: req.headers['user-agent']
   }
 
-  const stmt = db.prepare(`INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES(?,?,?,?,?,?,?,?,?,?);`);
+  const stmt = db.prepare(`INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, secure, status, referer, useragent) VALUES(?,?,?,?,?,?,?,?,?,?,?);`);
   const info = stmt.run(
     String(logdata.remoteaddr),
     String(logdata.remoteuser),
@@ -136,10 +136,12 @@ app.use((req, res, next) => {
     String(logdata.url),
     String(logdata.protocol),
     String(logdata.httpversion),
+    String(logdata.secure),
     String(logdata.status),
     String(logdata.referer),
     String(logdata.useragent)
   );
+  next();
 })
 
 app.get('/app/', (req, res) => {
@@ -171,4 +173,5 @@ app.get('/app/flip/call/:guess', (req, res) => {
 
 app.use(function(req, res) {
     res.status(404).send('404 NOT FOUND');
+    res.type("text/plain");
 });
