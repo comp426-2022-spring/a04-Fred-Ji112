@@ -3,11 +3,14 @@ const app = express();
 const db = require('./database.js');
 const fs = require('fs');
 
-
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
 
 const min = require('minimist');
-const res = require('express/lib/response');
 const args = min(process.argv.slice(2));
+
+args['port', 'debug', 'log', 'help'] ;
+const port = args.port || process.env.PORT || 5555;
 
 const help = (`
 server.js [options]
@@ -84,8 +87,7 @@ function coinFlip() {
  // end of functions
 
 
-args['port', 'debug', 'log', 'help'] ;
-const port = args.port || process.env.PORT || 5555;
+
 
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))

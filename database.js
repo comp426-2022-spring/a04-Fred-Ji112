@@ -4,7 +4,7 @@ const Database = require("better-sqlite3");
 
 const db = new Database('log.db');
 
-const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='accesslog'`);
+const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='accesslog';`);
 
 let row = stmt.get();
 
@@ -30,7 +30,7 @@ if(row === undefined) {
 
     db.exec(sqlInit);
 
-    console.log('New Table Added to Database');
+    console.log('New Table Added to Database.');
     
 } else {
     console.log('Database exists.');
