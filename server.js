@@ -3,7 +3,7 @@ const app = express();
 const db = require('./database.js');
 const fs = require('fs');
 
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const min = require('minimist');
@@ -103,7 +103,7 @@ if(args.debug == true) {
     }
   });
   
-  app.get('app/error', (req,res) => {
+  app.get('/app/error', (req,res) => {
     res.status(500);
     throw new Error('Error test completed successfully.');
   });
@@ -131,17 +131,17 @@ app.use((req, res, next) => {
 
   const stmt = db.prepare(`INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, secure, status, referer, useragent) VALUES(?,?,?,?,?,?,?,?,?,?,?);`);
   const info = stmt.run(
-    String(logdata.remoteaddr),
-    String(logdata.remoteuser),
-    String(logdata.time),
-    String(logdata.method),
-    String(logdata.url),
-    String(logdata.protocol),
-    String(logdata.httpversion),
-    String(logdata.secure),
-    String(logdata.status),
-    String(logdata.referer),
-    String(logdata.useragent)
+    logdata.remoteaddr,
+    logdata.remoteuser,
+    logdata.time,
+    logdata.method,
+    logdata.url,
+    logdata.protocol,
+    logdata.httpversion,
+    logdata.secure,
+    logdata.status,
+    logdata.referer,
+    logdata.useragent
   );
   next();
 })
