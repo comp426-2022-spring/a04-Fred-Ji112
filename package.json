@@ -1,0 +1,26 @@
+{
+  "name": "a04-fred-ji112",
+  "version": "1.0.0",
+  "description": "a04",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-spring/a04-Fred-Ji112.git"
+  },
+  "author": "Frederich Ji",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-spring/a04-Fred-Ji112/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-spring/a04-Fred-Ji112#readme",
+  "dependencies": {
+    "better-sqlite3": "^7.5.1",
+    "express": "^4.18.0",
+    "fs": "^0.0.1-security",
+    "minimist": "^1.2.6"
+  }
+}
